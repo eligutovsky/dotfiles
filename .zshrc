@@ -5,7 +5,6 @@ DEFAULT_USER="i.ponkratenko"
 ZSH_THEME="agnoster"
 
 alias zshrc="subl ~/.zshrc"
-alias bundle!="bundle install && rake install"
 alias gc="git checkout"
 alias gco="git checkout"
 alias gcm="git checkout master"
@@ -13,9 +12,10 @@ alias gpull="git pull"
 alias gpush="git push"
 alias gbranch="git checkout -b"
 alias gclone="git clone"
-alias g="gittower ."
+alias g="open -a SourceTree ."
 alias s="subl ."
 alias o="open ."
+alias reload!=". ~/.zshrc"
 
 alias yota="sudo sysctl -w net.inet.ip.ttl=65"
 
@@ -51,6 +51,8 @@ openx(){
 }
 
 source $ZSH/oh-my-zsh.sh
+source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 # Preferred editor for local and remote sessions
 if [[ -n $SSH_CONNECTION ]]; then
