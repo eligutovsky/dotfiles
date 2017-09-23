@@ -23,3 +23,7 @@ cp .zshrc ~/.zshrc
 # Sublime
 [Keyboard Shortcuts - OSX](http://docs.sublimetext.info/en/latest/reference/keyboard_shortcuts_osx.html)
 
+Add the `subl` command:
+```sh
+sudo mkdir -p "/usr/local/bin/" && ln -s /Applications/Sublime\ Text.app/Contents/SharedSupport/bin/subl /usr/local/bin/subl
+```
