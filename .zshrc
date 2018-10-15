@@ -74,9 +74,3 @@ function up() {
 
 # Init rbenv
 eval "$(rbenv init -)"
-
-# HeadHunter
-alias app="cd ~/Developer/hh-iphone"
-alias emp="cd ~/Developer/hh-ios-emp"
-alias her="cd ~/Developer/headhunter-applicant/headhunter-applicant"
-alias bamboo="ssh macmac@iphone.pyn.ru"
