@@ -5,6 +5,7 @@ brew 'openssl'
 brew 'wget'
 brew 'zsh-autosuggestions'
 brew 'gpg'
+brew 'rbenv'
 
 cask '1password'
 cask 'tunnelbear'
