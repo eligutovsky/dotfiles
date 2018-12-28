@@ -8,6 +8,12 @@ Instal Homebrew
 /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)" 
 ```
 
+Instal a configured bundle
+
+```sh
+brew bundle
+```
+
 Search a new app: 
 ```sh
 brew search ...
