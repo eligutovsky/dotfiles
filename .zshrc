@@ -1,7 +1,6 @@
 # Path to your oh-my-zsh installation.
 export ZSH=$HOME/.oh-my-zsh
 
-DEFAULT_USER="i.ponkratenko"
 ZSH_THEME="agnoster"
 
 alias zshrc="subl ~/.zshrc"
