@@ -1,27 +1,27 @@
-# [Homebrew](https://brew.sh/index_ru.html)
+# Dotfiles
 
-## Instalation:
+## [Homebrew](https://brew.sh/index_ru.html)
 
-Instal Homebrew
-
-```sh
-/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)" 
-```
-
-Instal a configured bundle
+### Instalation
 
 ```sh
-brew bundle
+$ /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)" 
+$ brew bundle
 ```
 
-Search a new app: 
+### Tips
+
+Search an app
 ```sh
-brew search ...
+$ brew search <query>
 ```
 
-# [Oh-my-zsh](https://github.com/robbyrussell/oh-my-zsh)
+## [Oh-my-zsh](https://github.com/robbyrussell/oh-my-zsh)
+
+Copy file
 
 ```sh
-cp .zshrc ~/.zshrc
+$ cp .zshrc $HOME/.zshrc
 ```
+
 [Customization](https://gist.github.com/kevin-smets/8568070)
