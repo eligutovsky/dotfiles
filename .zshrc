@@ -1,35 +1,104 @@
-# Path to your oh-my-zsh installation.
-export ZSH=$HOME/.oh-my-zsh
-
-DEFAULT_USER="i.ponkratenko"
-ZSH_THEME="agnoster"
-
-alias zshrc="subl ~/.zshrc"
-alias gc="git checkout"
-alias gco="git checkout"
-alias gcm="git checkout master"
-alias gpull="git pull"
-alias gpush="git push"
-alias gbranch="git checkout -b"
-alias gclone="git clone"
-alias g="open -a SourceTree ."
-alias s="subl ."
-alias o="open ."
-alias reload!=". ~/.zshrc"
-
-alias yota="sudo sysctl -w net.inet.ip.ttl=65"
-
-function o() {
-  z $1 && open .
-}
-
-export PATH=$PATH:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
-export PATH=$HOME/bin:$PATH
-export PATH=$HOME/homebrew/bin:$PATH
-
 export LANG=en_US.UTF-8
 
-. ~/.oh-my-zsh/eli/z.sh
+# Install plugins
+# git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+# git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+
+plugins=( 
+  git
+  zsh-autosuggestions
+  zsh-syntax-highlighting
+)
+
+source $ZSH/oh-my-zsh.sh
+
+# User configuration
+DEFAULT_USER="eligu"
+
+# Theme
+ZSH_THEME="powerlevel10k/powerlevel10k"
+
+# Fonts
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+
+# Ruby
+export PATH="$PATH:$HOME/.rvm/bin"
+
+# Node
+export NVM_DIR="$HOME/.nvm"
+  [ -s "/usr/local/opt/nvm/nvm.sh" ] && . "/usr/local/opt/nvm/nvm.sh"  # This loads nvm
+  [ -s "/usr/local/opt/nvm/etc/bash_completion.d/nvm" ] && . "/usr/local/opt/nvm/etc/bash_completion.d/nvm"  # This loads nvm bash_completion
+
+# Android 
+export ANDROID_HOME=$HOME/Library/Android/sdk
+export ANDROID_SDK_ROOT=$HOME/Library/Android/sdk
+export PATH=$PATH:$ANDROID_HOME/emulator
+export PATH=$PATH:$ANDROID_HOME/tools
+export PATH=$PATH:$ANDROID_HOME/tools/bin
+export PATH=$PATH:$ANDROID_HOME/platform-tools
+alias run-android='emulator -avd Pixel_5_API_30 -qemu -no-audio'
+
+
+
+
+alias zshrc="code ~/.zshrc"
+alias reload!=". ~/.zshrc"
+
+
+
+# wix related
+alias npm-public='npm config set registry https://registry.npmjs.org'
+alias npm-private='npm config set registry http://npm.dev.wixpress.com/'
+alias npmclean='rm -rf node_modules && rm -rf package-lock.json && npm install --legacy-peer-deps'
+alias rc='rm -rf $TMPDIR/metro-* && rm -rf $TMPDIR/haste-* && watchman watch-del-all'
+export PATH=$PATH:./node_modules/.bin/
+bah () {
+	rm -f package-lock.json
+	rm -rf node_modules
+	rm -rf $TMPDIR/metro* && rm -rf $TMPDIR/haste-* && rm -rf ~/.rncache && watchman watch-del-all
+	node --max_old_space_size=8000 $(which npm) install --legacy-peer-deps --loglevel http 
+	echo -en "\007"
+}
+
+# git 
+
+perciseCommit() {
+    git commit -S -m "${1:-update}"
+}
+
+lazyCommit() {
+    git add .
+    git commit -S -m "${1:-update}"
+}
+
+superCommit(){
+    git add .
+    git commit -S -m "${1:-update}"
+    git push
+}
+
+# ELI:git
+
+alias gs='git status'
+alias gsb='git status -sb'
+alias gsts='git stash save'
+alias gsta='git stash apply'
+alias gstp='git stash pop'
+alias gstl='git stash list'
+alias gstc='git stash clear'
+alias gsm='git switch master'
+alias gmm='git merge master'
+alias gmc='git merge --continue'
+alias gfp='git fetch && git pull'
+alias gush="git push"
+alias gull="git pull"
+alias st='stree .'
 
 # Xcode via @orta
 openx(){ 
@@ -50,27 +119,15 @@ openx(){
   fi
 }
 
-source $ZSH/oh-my-zsh.sh
-source /usr/local/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-source /usr/local/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+# python env
+eval "$(pyenv init -)"
 
-# Preferred editor for local and remote sessions
-if [[ -n $SSH_CONNECTION ]]; then
-  export EDITOR='nano'
-else
-  export EDITOR='subl'
-fi
+# GPG
+export GPG_TTY=$(tty)
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-# Go to the root of the current git project, or just go one folder up
-function up() {
-  export git_dir="$(git rev-parse --show-toplevel 2> /dev/null)"
-  if [ -z $git_dir ]
-  then
-    cd ..
-  else
-    cd $git_dir
-  fi
-}
 
-# Init rbenv
-eval "$(rbenv init -)"
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# 1Password
+export SSH_AUTH_SOCK=~/Library/Group\ Containers/2BUA8C4S2C.com.1password/t/agent.sock
