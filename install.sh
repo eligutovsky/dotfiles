@@ -21,7 +21,7 @@ ZshInstall() {
 # SETUP
 echo "Setting up your Mac..."
 
-HomebrewInstall
-ZshInstall
+HomebrewInstall || true
+ZshInstall || true
 
 echo "Setup complete. Please restart your terminal"
